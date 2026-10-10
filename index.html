@@ -3,375 +3,366 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Britikaa 💗</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<title>A Little Surprise 💗</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffc4e3, #e6a4ed, #ffd5e9);
-    overflow-x: hidden;
-    color: white;
-}
-
-.page {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 14px;
-    overflow: hidden;
-}
-
-/* REALISTIC GIFT ARTWORK */
-
-.gift-scene {
-    position: relative;
-    width: min(100%, 600px);
-    aspect-ratio: 3 / 4;
-    max-height: 86svh;
-    border-radius: 22px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px #9e387b40;
-    animation: sceneAppear 1.2s ease both;
-}
-
-.gift-art {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition:
-        transform 1.2s cubic-bezier(.2,.8,.2,1),
-        filter 1s ease,
-        opacity 1s ease;
-}
-
-/* CLICKABLE GIFT AREA */
-
-.gift-hotspot {
-    position: absolute;
-    z-index: 3;
-    left: 19%;
-    top: 28%;
-    width: 65%;
-    height: 48%;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-radius: 20px;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.gift-hotspot:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 3px;
-}
-
-/* LITTLE HINT */
-
-.tap-message {
-    position: absolute;
-    z-index: 4;
-    bottom: 4%;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-    text-shadow: 0 2px 10px #b23e83;
-    pointer-events: none;
-}
-
-/* OPENING TRANSITION */
-
-.gift-scene.opening .gift-art {
-    transform: scale(1.45) rotate(-3deg);
-    filter: brightness(1.3) blur(5px);
-    opacity: 0;
-}
-
-.gift-scene.opening .gift-hotspot {
-    pointer-events: none;
-}
-
-/* MESSAGE CARD */
-
-.message-card {
-    position: absolute;
-    z-index: 5;
-    width: min(88%, 440px);
-    padding: 28px 23px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -40%) scale(.85);
-    opacity: 0;
-    pointer-events: none;
-    text-align: center;
-
-    border: 1px solid #ffffffaa;
-    border-radius: 28px;
-
-    background: linear-gradient(
-        145deg,
-        #ffffff65,
-        #ffcae866
-    );
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    box-shadow:
-        0 15px 45px #a43e7b35,
-        inset 0 1px 1px #ffffffaa;
-
-    transition:
-        opacity .9s ease,
-        transform .9s cubic-bezier(.2,.8,.2,1);
-}
-
-.message-card.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
-}
-
-.message-card h1 {
-    font-size: clamp(23px, 6vw, 32px);
-    line-height: 1.4;
-    margin-bottom: 15px;
-    text-shadow: 0 3px 15px #c64d9180;
-}
-
-.message-card p {
-    font-size: 13px;
-    line-height: 2;
-    color: #fffaff;
-    font-weight: 500;
-}
-
-/* CONTINUE BUTTON */
-
-.continue-btn {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 13px 25px;
-
-    color: #d44b93;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
-
-    border-radius: 50px;
-    border: 1px solid #ffffffcc;
-
-    background: linear-gradient(
-        135deg,
-        #fff8fd,
-        #ffd5eb
-    );
-
-    box-shadow: 0 5px 25px #ffffff60;
-
-    opacity: 0;
-    transform: translateY(15px);
-    pointer-events: none;
-
-    transition: opacity .7s ease, transform .7s ease;
-}
-
-.continue-btn.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    animation: glow 1.8s infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        box-shadow: 0 5px 18px #ffffff60;
-    }
-    to {
-        box-shadow: 0 5px 28px #ffffffdd, 0 0 20px #ff9dd2;
-    }
-}
-
-/* FLOATING HEARTS */
-
-.heart {
-    position: fixed;
-    bottom: -30px;
-    z-index: 8;
-    pointer-events: none;
-    animation: floatHeart 3s ease-out forwards;
-    filter: drop-shadow(0 0 8px #ffffff80);
-}
-
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(.7);
-        opacity: 0;
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100svh) rotate(35deg) scale(1.3);
-        opacity: 0;
-    }
-}
-
-@keyframes sceneAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* MOBILE */
-
-@media (max-width: 480px) {
-    .page {
-        padding: 12px;
-    }
-
-    .gift-scene {
-        width: 100%;
-        max-height: 82svh;
-    }
-
-    .message-card {
-        padding: 23px 18px;
-    }
-
-    .message-card p {
-        font-size: 12px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-}
+  :root { --pink:#ff4f9a; --deep:#c91f70; --cream:#fff5fa; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; min-height:100%; }
+  body {
+    min-height:100svh; overflow-x:hidden; color:#70264c;
+    font-family: "Trebuchet MS", system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse at 50% 36%, rgba(255,255,255,.94) 0%, rgba(255,224,241,.8) 23%, transparent 55%),
+      radial-gradient(ellipse at 15% 10%, #ffd1e8 0%, transparent 40%),
+      radial-gradient(ellipse at 90% 80%, #ffb5d9 0%, transparent 42%),
+      linear-gradient(145deg,#fff0f8,#ffc2e0 48%,#ff9bcd);
+  }
+  body:before {
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.22;
+    background-image:radial-gradient(#fff 1px,transparent 1.5px);
+    background-size:35px 35px;
+    mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent);
+  }
+  #scene { position:absolute; inset:0; width:100%; height:100%; min-height:620px; display:block; touch-action:manipulation; }
+  .page { position:relative; z-index:2; min-height:100svh; display:flex; flex-direction:column; align-items:center; text-align:center; padding:34px 18px 30px; pointer-events:none; }
+  .heading { margin:0; font-size:clamp(2rem,7vw,3.1rem); letter-spacing:-1.5px; color:#c52d78; text-shadow:0 2px 0 #fff,0 7px 22px #f58fbe77; }
+  .subtitle { margin:8px 0 0; font-size:clamp(.98rem,3vw,1.12rem); color:#9b4774; }
+  .stage-space { height:clamp(335px,54vh,470px); width:100%; max-width:620px; }
+  .hint { margin:-2px 0 0; font-size:.88rem; letter-spacing:.3px; color:#9a4a76; text-shadow:0 1px #fff; transition:opacity .3s; margin-top: 50px;}
+  .note { display:none; width:min(92%,520px); margin:0 auto; padding:24px 22px 21px; border:1px solid #ffffffd9; border-radius:25px; background:linear-gradient(145deg,#ffffffed,#fff0f8e8); box-shadow:0 18px 55px #bd397a26,inset 0 1px #fff; backdrop-filter:blur(12px); }
+  .note.show { display:block; position:absolute; z-index:3; top:49%; left:50%; margin:0; animation:noteIn .75s cubic-bezier(.2,.8,.2,1) both; }
+  .page.note-revealed .stage-space { height:0; }
+  .page.note-revealed .hint { display:none; }
+  .note h2 { margin:0 0 8px; color:#c52d78; font-size:1.55rem; }
+  .note p { margin:10px 0; line-height:1.55; font-size:1rem; color:#783052; }
+  .note .line { font-weight:700; color:#b42e70; }
+  .continue { pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; min-height:48px; min-width:145px; margin-top:12px; padding:12px 26px; border:1px solid #fff8; border-radius:999px; background:linear-gradient(135deg,#ff75b4,#e93689); color:white; font-size:1rem; font-weight:800; text-decoration:none; box-shadow:0 9px 22px #d72b7a42,inset 0 1px #ffffff9c; transition:transform .2s,box-shadow .2s; }
+  .continue:active { transform:scale(.97); }
+  .continue:focus-visible { outline:3px solid #8e2058; outline-offset:4px; }
+  .status { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+  .sparkle { position:fixed; z-index:1; pointer-events:none; color:#fff; text-shadow:0 0 9px #ff4f9a; animation:twinkle var(--dur,3s) ease-in-out infinite; opacity:.8; }
+  @keyframes twinkle { 0%,100%{transform:scale(.65) rotate(0deg);opacity:.25} 50%{transform:scale(1.2) rotate(25deg);opacity:1} }
+  @keyframes noteIn { from{opacity:0;transform:translate(-50%,-44%) scale(.96)} to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
+  @media(max-height:720px) { .page{padding-top:22px}.stage-space{height:330px}.note{padding:17px 18px}.note p{margin:7px 0} }
+  @media(prefers-reduced-motion:reduce) { .sparkle{animation:none} .continue{transition:none} }
 </style>
 </head>
-
 <body>
+<canvas id="scene" aria-label="Interactive three-dimensional pink birthday gift"></canvas>
+<div class="page">
+  <h1 class="heading">A Little Surprise 💗</h1>
+  <p class="subtitle">Made with love, just for you ✨</p>
+  <div class="stage-space" aria-hidden="true"></div>
+  <p class="hint" id="hint">Tap the gift to open ✨</p>
+  <section class="note" id="note" aria-live="polite">
+    <h2>Happy Birthday, Britiii! 🎂</h2>
+    <p class="line">Happy 9teen fuchiii 💋</p>
+    <p>You deserve all the happiness, love and magic in this world. Keep shining, birthday girl! ✨</p>
+    <p>Now this is the last teen year you got, so live it to the fullest 😘</p>
+    <a class="continue" href="page2.html">Continue →</a>
+  </section>
+  <p class="status" id="status">Tap the gift to begin the surprise.</p>
+</div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
 
-<main class="page">
+const canvas = document.querySelector('#scene');
+const hint = document.querySelector('#hint');
+const note = document.querySelector('#note');
+const status = document.querySelector('#status');
+const page = document.querySelector('.page');
 
-    <div class="gift-scene" id="giftScene">
+const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true, powerPreference:'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.22;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-        <img
-            class="gift-art"
-            src="a_dreamy_pastel_pink_glittery_magical_birthday.png"
-            alt="A beautiful pink birthday gift for Britikaa"
-        >
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xffd8eb, 12, 27);
+const camera = new THREE.PerspectiveCamera(34, window.innerWidth/window.innerHeight, .1, 80);
+camera.position.set(0, 4.2, 12.8);
+camera.lookAt(0, 1.4, 0);
 
-        <button
-            class="gift-hotspot"
-            id="giftButton"
-            aria-label="Open your birthday surprise"
-        ></button>
+scene.add(new THREE.HemisphereLight(0xfff3fa, 0x9d456b, 2.0));
+const keyLight = new THREE.DirectionalLight(0xfff7fc, 4.1);
+keyLight.position.set(-4, 8, 7); keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024,1024); keyLight.shadow.camera.left=-7; keyLight.shadow.camera.right=7; keyLight.shadow.camera.top=8; keyLight.shadow.camera.bottom=-5;
+scene.add(keyLight);
+const pinkLight = new THREE.PointLight(0xff6eb6, 26, 13); pinkLight.position.set(4,3,3); scene.add(pinkLight);
+const rimLight = new THREE.PointLight(0xffffff, 18, 10); rimLight.position.set(-4,4,-2); scene.add(rimLight);
 
-        <div class="tap-message" id="tapMessage">
-            Tap the gift to open 💗
-        </div>
+const mat = (color, roughness=.3, metalness=0, extra={}) => new THREE.MeshStandardMaterial({color, roughness, metalness, ...extra});
+const boxPink = mat(0xf54f9d,.22,.12);
+const boxSide = mat(0xd82d7d,.28,.08);
+const insidePink = mat(0xffb7d8,.4,.03);
+const gold = mat(0xffd37b,.2,.72);
+const goldDark = mat(0xc78a36,.27,.72);
+const satin = mat(0xff9bc9,.24,.18,{side:THREE.DoubleSide});
+const satinLight = mat(0xffd2e7,.2,.12,{side:THREE.DoubleSide});
+const groundMat = mat(0xffc5df,.72,0);
 
-    </div>
+const ground = new THREE.Mesh(new THREE.CircleGeometry(8,64), groundMat);
+ground.rotation.x=-Math.PI/2; ground.position.y=-.05; ground.receiveShadow=true; scene.add(ground);
+const shadowDisc = new THREE.Mesh(new THREE.CircleGeometry(1.7,48), new THREE.MeshBasicMaterial({color:0xa92768,transparent:true,opacity:.13,depthWrite:false}));
+shadowDisc.rotation.x=-Math.PI/2; shadowDisc.position.set(0,.005,0); shadowDisc.scale.set(1.25,.62,1); scene.add(shadowDisc);
 
-    <section class="message-card" id="messageCard">
+const gift = new THREE.Group(); gift.position.set(0, .15, 0); scene.add(gift);
+const base = new THREE.Group(); gift.add(base);
+const boxGeo = new THREE.BoxGeometry(2.65,1.85,2.1,1,1,1);
+const body = new THREE.Mesh(boxGeo, boxPink); body.position.y=.98; body.castShadow=true; body.receiveShadow=true; base.add(body);
+const inside = new THREE.Mesh(new THREE.BoxGeometry(2.51,.08,1.96),insidePink); inside.position.y=1.91; inside.castShadow=true; base.add(inside);
 
-        <h1>Happy Birthday, Britiii! 🎂</h1>
+// Fine gold edging around the bottom and top of the box.
+function addBoxTrim(y) {
+  const g = new THREE.Group();
+  const x=2.68,z=2.13,t=.035;
+  const pieces=[
+    [[x,t,t],[0,y,z/2]], [[x,t,t],[0,y,-z/2]],
+    [[t,t,z],[x/2,y,0]], [[t,t,z],[-x/2,y,0]]
+  ];
+  for(const [size,pos] of pieces){const m=new THREE.Mesh(new THREE.BoxGeometry(...size),gold);m.position.set(...pos);m.castShadow=true;g.add(m);}
+  base.add(g);
+}
+addBoxTrim(.08); addBoxTrim(1.88);
 
-        <p>
-            Happy 9teen fuchiii 💋<br>
+// Broad glossy ribbons running over the box faces.
+const frontRibbon = new THREE.Mesh(new THREE.BoxGeometry(.43,1.87,2.13),gold);
+frontRibbon.position.set(0,.98,0); frontRibbon.castShadow=true; base.add(frontRibbon);
+const crossRibbon = new THREE.Mesh(new THREE.BoxGeometry(2.68,1.87,.4),gold);
+crossRibbon.position.set(0,.98,0); crossRibbon.castShadow=true; base.add(crossRibbon);
+const ribbonHighlight = mat(0xffedbd,.19,.38);
+const ribbonStripe = new THREE.Mesh(new THREE.BoxGeometry(.065,1.88,2.14),ribbonHighlight);
+ribbonStripe.position.set(.105,.98,0); base.add(ribbonStripe);
 
-            You deserve all the happiness, love and magic
-            in this world. Keep shining, birthday girl! ✨<br>
+// Hinged lid: pivot is at its back edge so it truly swings open.
+const lidPivot = new THREE.Group(); lidPivot.position.set(0,1.93,-1.02); gift.add(lidPivot);
+const lid = new THREE.Mesh(new THREE.BoxGeometry(2.88,.32,2.34),boxPink);
+lid.position.set(0,.12,1.02); lid.castShadow=true; lid.receiveShadow=true; lidPivot.add(lid);
+const lidTop = new THREE.Mesh(new THREE.BoxGeometry(2.9,.055,2.36),mat(0xff8cbe,.2,.08));
+lidTop.position.set(0,.305,1.02); lidTop.castShadow=true; lidPivot.add(lidTop);
+const lidRibbonA = new THREE.Mesh(new THREE.BoxGeometry(.43,.065,2.36),gold);
+lidRibbonA.position.set(0,.34,1.02); lidPivot.add(lidRibbonA);
+const lidRibbonB = new THREE.Mesh(new THREE.BoxGeometry(2.9,.065,.4),gold);
+lidRibbonB.position.set(0,.34,1.02); lidPivot.add(lidRibbonB);
+const lidStripe = new THREE.Mesh(new THREE.BoxGeometry(.065,.07,2.36),ribbonHighlight);
+lidStripe.position.set(.105,.35,1.02); lidPivot.add(lidStripe);
 
-            Now this is the last teen year you got,
-            so live it to the fullest 😘
-        </p>
-
-        <a href="page2.html" class="continue-btn" id="continueBtn">
-            Continue to the next surprise 💗 →
-        </a>
-
-    </section>
-
-</main>
-
-<script>
-const giftScene = document.getElementById("giftScene");
-const giftButton = document.getElementById("giftButton");
-const messageCard = document.getElementById("messageCard");
-const continueBtn = document.getElementById("continueBtn");
-const tapMessage = document.getElementById("tapMessage");
-
-let opened = false;
-
-function createHearts() {
-    const symbols = ["💗", "💕", "✨", "💖", "♡"];
-
-    for (let i = 0; i < 24; i++) {
-        setTimeout(() => {
-            const heart = document.createElement("span");
-
-            heart.className = "heart";
-            heart.textContent =
-                symbols[Math.floor(Math.random() * symbols.length)];
-
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (12 + Math.random() * 18) + "px";
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 3200);
-        }, i * 100);
+// Bow loops are curved satin ribbons, built as smooth 3D tube-like strips.
+function makeRibbonLoop(points, material, width=.19) {
+  const curve = new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)), false, 'catmullrom', .25);
+  const frames=curve.computeFrenetFrames(64,false), verts=[], uvs=[], indices=[];
+  const steps=64, sides=8;
+  for(let i=0;i<=steps;i++){
+    const t=i/steps, p=curve.getPointAt(t), n=frames.normals[i], b=frames.binormals[i];
+    for(let j=0;j<=sides;j++){
+      const v=j/sides, ang=v*Math.PI*2;
+      const q=p.clone().addScaledVector(n,Math.cos(ang)*width*.34).addScaledVector(b,Math.sin(ang)*width*.34);
+      verts.push(q.x,q.y,q.z); uvs.push(t,v);
     }
+  }
+  for(let i=0;i<steps;i++) for(let j=0;j<sides;j++){
+    const a=i*(sides+1)+j,b=a+sides+1; indices.push(a,b,a+1,b,b+1,a+1);
+  }
+  const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3)); geo.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2)); geo.setIndex(indices); geo.computeVertexNormals();
+  const mesh=new THREE.Mesh(geo,material); mesh.castShadow=true; mesh.receiveShadow=true; return mesh;
+}
+const bow = new THREE.Group(); bow.position.set(0,2.22,0); gift.add(bow);
+bow.add(makeRibbonLoop([[0,0,0],[.16,.25,.02],[.58,.49,.02],[.86,.42,.02],[.83,.17,.04],[.48,.08,.05],[.12,.13,.03]],satin,.24));
+bow.add(makeRibbonLoop([[0,0,0],[-.16,.25,.02],[-.58,.49,.02],[-.86,.42,.02],[-.83,.17,.04],[-.48,.08,.05],[-.12,.13,.03]],satinLight,.24));
+function bowTail(points,material) {
+  const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));
+  const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,40,.065,8,false),material); mesh.castShadow=true; return mesh;
+}
+bow.add(bowTail([[0,0,0],[.13,-.18,.04],[.38,-.44,.04],[.48,-.62,.04]],satin));
+bow.add(bowTail([[0,0,0],[-.1,-.2,.05],[-.31,-.42,.05],[-.42,-.61,.05]],satinLight));
+const bowKnot=new THREE.Mesh(new THREE.SphereGeometry(.19,24,16),gold); bowKnot.scale.set(1,.72,.75); bowKnot.castShadow=true; bow.add(bowKnot);
+
+// Silver bin, hidden offstage until the wrapping is flying.
+const bin = new THREE.Group(); scene.add(bin); bin.position.set(5.2,.0,.5); bin.rotation.z=-.04;
+const silver = new THREE.MeshStandardMaterial({color:0xbfc5ce,metalness:.92,roughness:.2});
+const silverDark = new THREE.MeshStandardMaterial({color:0x707986,metalness:.9,roughness:.27});
+const binBody = new THREE.Mesh(new THREE.CylinderGeometry(.56,.43,1.25,48,1,true),silver);
+binBody.position.y=.64; binBody.castShadow=true; binBody.receiveShadow=true; bin.add(binBody);
+const binBottom = new THREE.Mesh(new THREE.CylinderGeometry(.43,.43,.07,48),silverDark); binBottom.position.y=.07; bin.add(binBottom);
+const binRim = new THREE.Mesh(new THREE.TorusGeometry(.55,.075,12,48),silver); binRim.rotation.x=Math.PI/2; binRim.position.y=1.27; bin.add(binRim);
+const binLip = new THREE.Mesh(new THREE.TorusGeometry(.48,.035,10,48),silverDark); binLip.rotation.x=Math.PI/2; binLip.position.y=1.2; bin.add(binLip);
+const binLid = new THREE.Mesh(new THREE.CylinderGeometry(.54,.54,.09,48),silver); binLid.position.y=1.37; binLid.castShadow=true; bin.add(binLid);
+const binHandle = new THREE.Mesh(new THREE.TorusGeometry(.14,.035,10,24),silverDark); binHandle.position.set(0,1.46,.49); bin.add(binHandle);
+
+// Wrapping pieces: actual thin, shaded 3D panels.
+const wrapperMat = mat(0xff79b5,.25,.08,{side:THREE.DoubleSide});
+const wrapperGold = mat(0xffd67d,.22,.5,{side:THREE.DoubleSide});
+function makeWrapper(w,h,material, x,y,z, rotX=0,rotY=0,rotZ=0) {
+  const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,.035,h),material);
+  mesh.position.set(x,y,z); mesh.rotation.set(rotX,rotY,rotZ); mesh.castShadow=true; mesh.receiveShadow=true; scene.add(mesh); mesh.visible=false;
+  return mesh;
+}
+const wrappers=[
+ makeWrapper(1.1,.85,wrapperMat,-.5,1.8,.4,.2,.1,.25),
+ makeWrapper(.8,1.0,wrapperMat,.45,2.1,.2,-.4,.3,-.5),
+ makeWrapper(1.25,.5,wrapperGold,.2,2.4,.6,.3,-.3,.5),
+ makeWrapper(.6,.9,wrapperMat,-.8,2.35,-.1,-.2,.4,-.25)
+];
+
+// Tiny floating sparkles.
+const sparkleGroup=new THREE.Group(); scene.add(sparkleGroup);
+const sparkleMat=new THREE.MeshBasicMaterial({color:0xffffff});
+for(let i=0;i<70;i++){
+  const s=new THREE.Mesh(new THREE.SphereGeometry(.018+Math.random()*.025,8,8),sparkleMat);
+  s.position.set((Math.random()-.5)*10,Math.random()*6-.3,(Math.random()-.5)*4-1);
+  s.userData={phase:Math.random()*6.28, speed:.5+Math.random()*1.3, baseY:s.position.y};
+  sparkleGroup.add(s);
 }
 
-function openGift() {
-    if (opened) return;
+// Invisible interaction plane in front of gift; raycast uses the canvas tap.
+const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
+const tapTargets=[body,lid,lidTop,bowKnot];
+let opened=false, startTime=0;
+const clock=new THREE.Clock();
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    opened = true;
-
-    giftScene.classList.add("opening");
-    tapMessage.style.opacity = "0";
-
-    createHearts();
-
-    setTimeout(() => {
-        messageCard.classList.add("show");
-    }, 650);
-
-    setTimeout(() => {
-        continueBtn.classList.add("show");
-    }, 1700);
+function startOpening(){
+  if(opened) return;
+  opened=true; startTime=clock.elapsedTime; hint.style.opacity='0'; status.textContent='Opening the birthday surprise!';
 }
+canvas.addEventListener('pointerdown', e=>{
+  if(opened) return;
+  const rect=canvas.getBoundingClientRect();
+  pointer.x=((e.clientX-rect.left)/rect.width)*2-1;
+  pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  raycaster.setFromCamera(pointer,camera);
+  const hits=raycaster.intersectObjects(gift.children,true);
+  if(hits.length) startOpening();
+});
+// Make the gift easy to tap on mobile, including its visible screen area.
+canvas.addEventListener('click',()=>{ if(!opened) startOpening(); });
 
-giftButton.addEventListener("click", openGift);
-</script>
+function ease(t){ return t<0?0:t>1?1:t*t*(3-2*t); }
+function smoothOut(t){t=Math.max(0,Math.min(1,t));return 1-Math.pow(1-t,3);}
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+  gift.rotation.y=Math.sin(t*.55)*.12;
+  gift.position.y=.15+Math.sin(t*1.5)*.045;
+  bow.rotation.y=Math.sin(t*1.8)*.08;
+  for(const s of sparkleGroup.children){s.position.y=s.userData.baseY+Math.sin(t*s.userData.speed+s.userData.phase)*.13;s.scale.setScalar(.7+.35*(1+Math.sin(t*2+s.userData.phase)));}
+  if(opened){
+    const elapsed=t-startTime;
+    // Lid opens on its actual back hinge, then gets flung away with the wrapping.
+    const lidOpen = smoothOut(elapsed/.62);
+    lidPivot.rotation.x=-Math.PI/2*lidOpen;
+    lidPivot.rotation.z=-.10*lidOpen;
+    if(elapsed>1.02){
+      const lidThrow=smoothOut((elapsed-1.02)/.72);
+      lidPivot.position.set(-.4-5.5*lidThrow,1.93+3.2*lidThrow,1.8*lidThrow);
+      lidPivot.rotation.set(-Math.PI/2+lidThrow*4.5,lidThrow*6,-.1-lidThrow*5);
+    }
+    // Bow lifts away, spins, and is thrown offstage.
+    if(elapsed>.68){
+      const q=smoothOut((elapsed-.68)/.85);
+      bow.position.set(-.3-4.5*q,2.25+2.6*q,1.3*q);
+      bow.rotation.set(q*4.5,q*8,q*6);
+    }
+    // Wrapper panels fly toward the side where the silver bin will peek in.
+    const wrapperData=[
+      {delay:.82,x:3.7,y:1.8,z:1.2,rx:5,ry:7,rz:4},
+      {delay:.88,x:4.0,y:2.4,z:1.1,rx:-6,ry:8,rz:-5},
+      {delay:.94,x:3.2,y:1.6,z:2.0,rx:7,ry:-6,rz:8},
+      {delay:1.0,x:3.5,y:2.8,z:-1.2,rx:-8,ry:-5,rz:6}
+    ];
+    wrappers.forEach((w,i)=>{
+      const d=wrapperData[i], q=smoothOut((elapsed-d.delay)/.95);
+      if(elapsed>d.delay) w.visible=true;
+      w.position.set((i===0?-.5:i===1?.45:i===2?.2:-.8)+d.x*q,
+        (i===0?1.8:i===1?2.1:i===2?2.4:2.35)+d.y*q,
+        (i===0?.4:i===1?.2:i===2?.6:-.1)+d.z*q);
+      w.rotation.set(q*d.rx,q*d.ry,q*d.rz);
+    });
+    // The box itself moves away, while the loose wrapping is what the bin catches.
+    if(elapsed>1.18){
+      const q=smoothOut((elapsed-1.18)/.72);
+      base.position.set(4.8*q,2.8*q,1.6*q);
+      base.rotation.set(q*5,q*7,q*4);
+      shadowDisc.material.opacity=.13*(1-q);
+    }
+    // Bin peeks in after the wrapping starts flying, pauses to catch it, then exits.
+    if(elapsed>1.48){
+      const enter=smoothOut((elapsed-1.48)/.62);
+      const retreat=smoothOut((elapsed-2.82)/.62);
+      bin.position.x=elapsed<2.82?5.2-4.35*enter:(.85+4.35*retreat);
+      bin.position.y=.0+Math.sin(enter*Math.PI)*.08;
+      bin.rotation.z=-.04+Math.sin(elapsed*8)*.018*(1-retreat);
+    }
+    // Wrapping panels arc into the open bin and disappear inside it.
+    if(elapsed>2.18){
+      const catchProgress=smoothOut((elapsed-2.18)/.48);
+      const targets=[[-.05,1.12,.25],[.06,1.08,.2],[0,1.15,.1],[-.08,1.1,.18]];
+      wrappers.forEach((w,i)=>{
+        const target=targets[i];
+        const targetPos=new THREE.Vector3(.85+target[0],target[1],.5+target[2]);
+        w.position.lerp(targetPos,.11*catchProgress);
+        w.rotation.x+=.045; w.rotation.y+=.055;
+        if(elapsed>2.7){
+          const hide=smoothOut((elapsed-2.7)/.28);
+          w.scale.setScalar(1-hide);
+          if(elapsed>2.98) w.visible=false;
+        }
+      });
+    }
+        // Dustbin enters and opens to catch the wrapping.
+    if(elapsed > 1.48){
+      const enter = smoothOut((elapsed - 1.48) / 0.62);
+      const leave = smoothOut((elapsed - 3.12) / 0.62);
 
-</body>
-</html>
+      bin.position.x = 5.2 - 4.35 * enter + 4.35 * leave;
+      bin.position.y = Math.sin(enter * Math.PI) * 0.08;
+      bin.rotation.z = -0.04;
+
+      const open = smoothOut((elapsed - 1.92) / 0.28);
+      const close = smoothOut((elapsed - 2.92) / 0.18);
+
+      binLid.rotation.z = -0.95 * open * (1 - close);
+      binLid.position.x = 0.38 * open * (1 - close);
+      binHandle.rotation.z = binLid.rotation.z;
+      binHandle.position.x = 0.38 * open * (1 - close);
+    }
+
+    // Wrapping flies into the dustbin and disappears.
+    if(elapsed > 2.12){
+      const flyIn = smoothOut((elapsed - 2.12) / 0.42);
+      const dropIn = smoothOut((elapsed - 2.52) / 0.34);
+
+      wrappers.forEach((w, i) => {
+        if(!w.userData.catchStart){
+          w.userData.catchStart = w.position.clone();
+        }
+
+        const offsets = [
+          [-0.18, 0, 0.12],
+          [0.12, 0.05, 0.02],
+          [0.02, 0.08, -0.12],
+          [0.18, -0.02, -0.08]
+        ];
+
+        const off = offsets[i];
+
+        const opening = new THREE.Vector3(
+          0.85 + off[0],
+          1.48 + off[1],
+          0.5 + off[2]
+        );
+
+        const inside = new THREE.Vector3(
+          0.85 + off[0] * 0.2,
+          0.92,
+          0.5 + off[2] * 0.2
+        );
+
+        w.position.copy(w.userData.catchStart).lerp(opening, flyIn);
+
+        w.rotation.x += 0.035;
+ 
