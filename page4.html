@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Memory ♡</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #55545b;
+    background:
+        radial-gradient(ellipse at 15% 15%,
+        #ffffff 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 80%,
+        #c7c7d0 0%, transparent 45%),
+        linear-gradient(145deg,
+        #eeeeF2, #d4d4de, #faf9fc, #bfc0ca);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 18px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Soft nostalgic film grain */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(255,255,255,0.4) 4px
+        );
+    z-index: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 390px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: appear 1.2s ease both;
+}
+
+/* Heading */
+
+.eyebrow {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #85848e;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.heading {
+    font-size: 34px;
+    font-weight: normal;
+    font-style: italic;
+    color: #62616b;
+    margin-bottom: 27px;
+    text-shadow: 1px 2px 8px rgba(255,255,255,0.9);
+}
+
+/* Polaroid photograph */
+
+.photo-frame {
+    width: min(290px, 85%);
+    margin: 0 auto;
+    padding: 12px 12px 20px;
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #f1f0f3,
+        #ffffff
+    );
+
+    box-shadow:
+        0 20px 40px rgba(75,72,88,0.16),
+        0 3px 8px rgba(255,255,255,0.9),
+        inset 0 0 0 1px rgba(150,150,165,0.2);
+
+    transform: rotate(-2deg);
+    animation: photoFloat 5s ease-in-out infinite;
+}
+
+.photo {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(
+        135deg,
+        #d7d7df,
+        #f8f7fa,
+        #c4c5d0
+    );
+
+    filter: saturate(0.88) contrast(0.96);
+}
+
+/* Caption under photograph */
+
+.photo-caption {
+    font-size: 15px;
+    font-style: italic;
+    color: #85838d;
+    margin-top: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Decorative divider */
+
+.divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 23px;
+    color: #9695a0;
+    font-size: 15px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    width: 55px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #aaa9b5
+    );
+}
+
+.divider::after {
+    transform: rotate(180deg);
+}
+
+/* Birthday note */
+
+.note {
+    padding: 22px 15px;
+    border-top: 1px solid rgba(255,255,255,0.85);
+    border-bottom: 1px solid rgba(255,255,255,0.85);
+
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(5px);
+
+    box-shadow:
+        0 8px 25px rgba(90,88,105,0.04);
+}
+
+.note p {
+    font-size: 18px;
+    line-height: 1.8;
+    font-style: italic;
+    color: #62616c;
+}
+
+.note p + p {
+    margin-top: 10px;
+}
+
+.heart {
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    color: #9695a3;
+}
+
+/* Continue button */
+
+.continue-btn {
+    margin-top: 28px;
+    padding: 13px 29px;
+
+    border: 1px solid rgba(255,255,255,0.95);
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.8),
+        rgba(208,208,220,0.7)
+    );
+
+    color: #666570;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 5px 18px rgba(95,92,110,0.12);
+
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.continue-btn:active {
+    transform: scale(0.96);
+}
+
+.footer {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #898894;
+    margin-top: 22px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes photoFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(-1deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <div class="eyebrow">
+        a memory, just for you
+    </div>
+
+    <h1 class="heading">
+        A little piece of forever ♡
+    </h1>
+
+    <div class="photo-frame">
+
+        <img
+            src="bestie.jpg"
+            alt="A beautiful memory of my bestie"
+            class="photo"
+        >
+
+        <div class="photo-caption">
+            a little piece of my favourite memories ♡
+        </div>
+
+    </div>
+
+    <div class="divider">✧</div>
+
+    <div class="note">
+
+        <p>
+            At last, Happy Birthday once againnnnn
+            <span class="heart">❤️</span>
+        </p>
+
+        <p>
+            Yestai khushi bus and keep smiling okie baby
+            😘
+        </p>
+
+    </div>
+
+    <button
+        class="continue-btn"
+        onclick="window.location.href='page5.html'"
+    >
+        Continue → ♡
+    </button>
+
+    <div class="footer">
+        MADE WITH LOVE, ALWAYS
+    </div>
+
+</main>
+
+</body>
+</html>
