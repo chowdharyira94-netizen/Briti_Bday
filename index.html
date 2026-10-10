@@ -365,4 +365,38 @@ function animate(){
         w.position.copy(w.userData.catchStart).lerp(opening, flyIn);
 
         w.rotation.x += 0.035;
+        w.rotation.y += 0.055;
+        w.rotation.z += 0.025;
+
+        if(elapsed > 2.52){
+          w.position.lerp(inside, dropIn);
+        }
+
+        if(elapsed > 2.72){
+          const hide = smoothOut((elapsed - 2.72) / 0.28);
+          w.scale.setScalar(Math.max(0.001, 1 - hide));
+
+          if(elapsed > 3.02){
+            w.visible = false;
+          }
+        }
+      });
+  }
+    if(elapsed>3.65 && !note.classList.contains('show')){
+      note.classList.add('show'); page.classList.add('note-revealed'); status.textContent='Birthday message revealed.';
+    }
+  }
+  renderer.render(scene,camera);
+}
+animate();
+
+function resize(){
+  const w=window.innerWidth,h=window.innerHeight;
+  camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.7));
+}
+window.addEventListener('resize',resize);
+</script>
+</body>
+</html>
  
