@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catch My Hearts ♡</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(145deg, #fff7ed, #ffe2d2, #f8cbb8);
+    color: #774c43;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+}
+
+.game {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 450px;
+    margin: auto;
+    overflow: hidden;
+    border-left: 2px solid rgba(255,255,255,0.6);
+    border-right: 2px solid rgba(255,255,255,0.6);
+}
+
+.top {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+}
+
+.game-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.score-box {
+    display: inline-block;
+    padding: 10px 25px;
+    background: rgba(255,255,255,0.6);
+    border: 2px solid rgba(255,255,255,0.9);
+    border-radius: 18px;
+    box-shadow: 4px 4px 0 rgba(181,119,97,0.15);
+}
+
+.score-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.score {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.instruction {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 9px 15px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.65);
+    font-size: 12px;
+    color: #966c60;
+}
+
+.pixel {
+    image-rendering: pixelated;
+}
+
+.heart {
+    position: absolute;
+    top: -45px;
+    z-index: 2;
+    font-size: 29px;
+    line-height: 1;
+    filter: drop-shadow(2px 3px 0 rgba(176,105,91,0.12));
+    pointer-events: none;
+    will-change: transform;
+}
+
+.basket {
+    position: absolute;
+    z-index: 4;
+    bottom: 45px;
+    left: 50%;
+    width: 100px;
+    height: 67px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    touch-action: none;
+    will-change: left;
+}
+
+.basket-handle {
+    width: 45px;
+    height: 24px;
+    border: 5px solid #b97965;
+    border-bottom: 0;
+    border-radius: 25px 25px 0 0;
+    margin-bottom: -4px;
+}
+
+.basket-body {
+    position: relative;
+    width: 82px;
+    height: 39px;
+    background: repeating-linear-gradient(
+        90deg,
+        #e6a78d 0px,
+        #e6a78d 12px,
+        #f4c3a9 12px,
+        #f4c3a9 23px
+    );
+    border: 3px solid #b97965;
+    border-radius: 5px 5px 20px 20px;
+    box-shadow: 3px 4px 0 rgba(151,91,75,0.16);
+}
+
+.basket-body::before {
+    content: "♡";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff8f1;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.ground {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    height: 2px;
+    background: rgba(177,119,96,0.2);
+}
+
+.controls-hint {
+    position: absolute;
+    bottom: 9px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.pixel-star {
+    position: absolute;
+    color: #dca88f;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(255,242,231,0.88);
+    backdrop-filter: blur(8px);
+}
+
+.overlay.show {
+    display: flex;
+    animation: fadeIn 0.5s ease both;
+}
+
+.card {
+    width: 100%;
+    max-width: 370px;
+    padding: 30px 22px;
+    text-align: center;
+    background: #fff9f1;
+    border: 3px solid white;
+    border-radius: 26px;
+    box-shadow: 7px 7px 0 #edc1ad;
+    animation: popIn 0.6s cubic-bezier(.2,.8,.2,1.2) both;
+}
+
+.trophy {
+    font-size: 47px;
+    margin-bottom: 12px;
+}
+
+.card h1 {
+    font-size: 25px;
+    line-height: 1.4;
+    color: #bb7867;
+    margin-bottom: 19px;
+}
+
+.message {
+    font-size: 19px;
+    line-height: 1.9;
+    font-weight: 700;
+    color: #8b5b50;
+    overflow-wrap: anywhere;
+}
+
+.message .last {
+    display: block;
+    margin-top: 7px;
+    font-size: 17px;
+}
+
+.continue {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 27px;
+    border: none;
+    border-radius: 30px;
+    background: #e9ad98;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 0 #c88d79;
+    cursor: pointer;
+}
+
+.continue:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #c88d79;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.75) translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes heartPop {
+    50% { transform: scale(1.4); }
+}
+
+@media (max-height: 550px) {
+    .top { top: 10px; }
+    .basket { bottom: 30px; }
+    .ground { bottom: 14px; }
+    .controls-hint { display: none; }
+    .card { padding: 18px; }
+    .message { font-size: 17px; line-height: 1.65; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game" id="game">
+
+    <div class="top">
+        <div class="game-label">♡ PLAYER ONE ♡</div>
+
+        <div class="score-box">
+            <div class="score-title">YOUR SCORE</div>
+            <div class="score">
+                <span id="score">0</span><span> / 19</span>
+            </div>
+        </div>
+
+        <div class="instruction">
+            Catch 19 hearts to win ♡
+        </div>
+    </div>
+
+    <div class="basket" id="basket" aria-label="Move the basket to catch hearts">
+        <div class="basket-handle"></div>
+        <div class="basket-body"></div>
+    </div>
+
+    <div class="ground"></div>
+
+    <div class="controls-hint">
+        MOVE THE BASKET WITH YOUR FINGER ♡
+    </div>
+
+    <div class="overlay" id="winOverlay">
+        <div class="card">
+
+            <div class="trophy">🏆🎀</div>
+
+            <h1>OMGGG you won 🥳</h1>
+
+            <div class="message">
+                Mwuahhhhhhhh 💋<br>
+                Birthday GIRLLL 🎂<br>
+                Lysm naniii ❤️😂
+
+                <span class="last">
+                    Aba ajai ek barsa budho chai vais 😇
+                </span>
+            </div>
+
+            <button class="continue"
+                onclick="window.location.href='page4.html'">
+                Continue →
+            </button>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+const game = document.getElementById("game");
+const basket = document.getElementById("basket");
+const scoreDisplay = document.getElementById("score");
+const winOverlay = document.getElementById("winOverlay");
+
+let score = 0;
+let hearts = [];
+let running = true;
+let lastSpawn = 0;
+let lastTime = 0;
+let spawnDelay = 750;
+let animationId;
+
+const heartTypes = ["💗", "🩷", "💕", "💖", "💝"];
+
+function makeDecorations() {
+    for (let i = 0; i < 20; i++) {
+        const star = document.createElement("div");
+        star.className = "pixel-star";
+        star.textContent = i % 2 === 0 ? "✦" : "·";
+        star.style.left = Math.random() * 95 + "%";
+        star.style.top = (130 + Math.random() * 65) + "%";
+        star.style.fontSize = (12 + Math.random() * 14) + "px";
+        game.appendChild(star);
+    }
+}
+
+function moveBasket(clientX) {
+    const rect = game.getBoundingClientRect();
+    const basketWidth = basket.offsetWidth;
+
+    let x = clientX - rect.left;
+
+    x = Math.max(basketWidth / 2,
+        Math.min(rect.width - basketWidth / 2, x));
+
+    basket.style.left = x + "px";
+}
+
+let dragging = false;
+
+basket.addEventListener("pointerdown", function(e) {
+    dragging = true;
+    basket.setPointerCapture(e.pointerId);
+    moveBasket(e.clientX);
+});
+
+basket.addEventListener("pointermove", function(e) {
+    if (dragging) moveBasket(e.clientX);
+});
+
+basket.addEventListener("pointerup", function() {
+    dragging = false;
+});
+
+basket.addEventListener("pointercancel", function() {
+    dragging = false;
+});
+
+// Also allow moving the basket by touching anywhere in the play area.
+game.addEventListener("pointerdown", function(e) {
+    if (e.target.closest("button") || e.target.closest(".basket")) return;
+    moveBasket(e.clientX);
+});
+
+game.addEventListener("pointermove", function(e) {
+    if (e.buttons === 1 && !e.target.closest("button")) {
+        moveBasket(e.clientX);
+    }
+});
+
+function spawnHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent =
+        heartTypes[Math.floor(Math.random() * heartTypes.length)];
+
+    const maxX = Math.max(0, game.clientWidth - 35);
+    const x = Math.random() * maxX;
+
+    heart.style.left = x + "px";
+    heart.style.top = "-45px";
+    game.appendChild(heart);
+
+    hearts.push({
+        element: heart,
+        x: x,
+        y: -45,
+        speed: 105 + Math.random() * 45,
+        size: 29
+    });
+}
+
+function winGame() {
+    if (!running) return;
+
+    running = false;
+
+    hearts.forEach(h => h.element.remove());
+    hearts = [];
+
+    cancelAnimationFrame(animationId);
+
+    setTimeout(function() {
+        winOverlay.classList.add("show");
+    }, 250);
+}
+
+function update(time) {
+    if (!running) return;
+
+    const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.04) : 0;
+    lastTime = time;
+
+    if (time - lastSpawn > spawnDelay) {
+        spawnHeart();
+        lastSpawn = time;
+    }
+
+    const gameRect = game.getBoundingClientRect();
+    const basketRect = basket.getBoundingClientRect();
+
+    const basketLeft = basketRect.left - gameRect.left;
+    const basketRight = basketLeft + basketRect.width;
+    const basketTop = basketRect.top - gameRect.top;
+
+    for (let i = hearts.length - 1; i >= 0; i--) {
+        const h = hearts[i];
+
+        h.y += h.speed * dt;
+        h.element.style.transform = `translateY(${h.y + 45}px)`;
+
+        const heartBottom = h.y + 45 + h.size;
+        const heartLeft = h.x;
+        const heartRight = h.x + h.size;
+
+        const overlapsBasket =
+            heartRight > basketLeft &&
+            heartLeft < basketRight &&
+            heartBottom >= basketTop &&
+            h.y + 45 < basketTop + basketRect.height;
+
+        if (overlapsBasket) {
+            h.element.remove();
+            hearts.splice(i, 1);
+
+            score++;
+            scoreDisplay.textContent = score;
+
+            if (score >= 19) {
+                scoreDisplay.textContent = "19";
+                winGame();
+                return;
+            }
+
+            continue;
+        }
+
+        if (h.y + 45 > game.clientHeight) {
+            h.element.remove();
+            hearts.splice(i, 1);
+        }
+    }
+
+    animationId = requestAnimationFrame(update);
+}
+
+makeDecorations();
+
+basket.style.left = (game.clientWidth / 2) + "px";
+
+animationId = requestAnimationFrame(update);
+</script>
+
+</body>
+</html>
