@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make a Wish 🌙🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --candle-light: 1;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: #02040d;
+    color: white;
+    transition: background 2s ease;
+}
+
+/* ===== NIGHT SKY ===== */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 75%,
+            rgba(103, 43, 105, 0.20),
+            transparent 45%),
+        linear-gradient(
+            180deg,
+            #030611 0%,
+            #080d24 50%,
+            #15112a 100%
+        );
+    transition: filter 2.5s ease, background 2.5s ease;
+    z-index: -3;
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+    transition: opacity 2.5s ease;
+}
+
+.star {
+    position: absolute;
+    color: #fff;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 6px rgba(255,255,255,0.7);
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* MOON */
+
+.moon {
+    position: absolute;
+    top: 9%;
+    right: 12%;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #fff5dc;
+    box-shadow:
+        0 0 20px rgba(255, 242, 205, 0.25),
+        0 0 55px rgba(255, 242, 205, 0.10);
+    transition: opacity 2s ease;
+}
+
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #080d24;
+    top: -8px;
+    left: 17px;
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.scene {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    isolation: isolate;
+}
+
+.intro {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 12px;
+    transition: opacity 1.5s ease;
+}
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #e7c5f4;
+    margin-bottom: 13px;
+}
+
+.heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 7vw, 48px);
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff7fb;
+    text-shadow: 0 0 22px rgba(255, 221, 247, 0.25);
+}
+
+.subheading {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    color: #bdb9d8;
+}
+
+/* ===== CAKE STAGE ===== */
+
+.cake-stage {
+    width: min(390px, 94vw);
+    height: 340px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+/* CANDLE LIGHT ILLUMINATES EVERYTHING */
+
+.light-glow {
+    position: absolute;
+    width: 390px;
+    height: 390px;
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        ellipse,
+        rgba(255, 163, 89, 0.25) 0%,
+        rgba(255, 125, 95, 0.15) 18%,
+        rgba(242, 100, 155, 0.09) 36%,
+        rgba(183, 113, 230, 0.04) 53%,
+        transparent 72%
+    );
+    filter: blur(16px);
+    opacity: 1;
+    transition: opacity 2.8s ease, transform 2.8s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* EXTRA WARM LIGHT AROUND CAKE */
+
+.warm-light {
+    position: absolute;
+    width: 280px;
+    height: 100px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(255, 121, 103, 0.14);
+    filter: blur(28px);
+    transition: opacity 2.5s ease;
+}
+
+/* ===== CHOCOLATE CAKE ===== */
+
+.cake {
+    position: absolute;
+    width: 310px;
+    height: 200px;
+    bottom: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 12px 15px rgba(0,0,0,0.4));
+    animation: cakeFloat 4s ease-in-out infinite;
+}
+
+@keyframes cakeFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-4px);
+    }
+}
+
+/* CAKE BASE */
+
+.cake-body {
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    width: 280px;
+    height: 105px;
+    border-radius: 0 0 28px 28px;
+    background:
+        linear-gradient(
+            90deg,
+            #321323 0%,
+            #693047 15%,
+            #512039 50%,
+            #71334b 82%,
+            #341525 100%
+        );
+    box-shadow:
+        inset 0 -12px 15px rgba(0,0,0,0.3),
+        inset 0 6px 10px rgba(255,190,210,0.1);
+}
+
+/* TOP FROSTING */
+
+.cake-top {
+    position: absolute;
+    width: 280px;
+    height: 66px;
+    left: 15px;
+    bottom: 70px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            ellipse at 50% 25%,
+            #a36a69,
+            #75434d 58%,
+            #492033 100%
+        );
+    box-shadow:
+        inset 0 5px 10px rgba(255,220,220,0.2),
+        0 4px 7px rgba(0,0,0,0.25);
+    z-index: 2;
+}
+
+/* FROSTING DRIPS */
+
+.drips {
+    position: absolute;
+    width: 280px;
+    height: 32px;
+    left: 15px;
+    bottom: 91px;
+    z-index: 3;
+}
+
+.drip {
+    position: absolute;
+    top: 0;
+    width: 23px;
+    height: 24px;
+    background: linear-gradient(90deg, #c18a83, #8e515b);
+    border-radius: 0 0 12px 12px;
+}
+
+.drip:nth-child(1) { left: 18px; height: 20px; }
+.drip:nth-child(2) { left: 52px; height: 29px; }
+.drip:nth-child(3) { left: 91px; height: 17px; }
+.drip:nth-child(4) { left: 142px; height: 26px; }
+.drip:nth-child(5) { left: 193px; height: 18px; }
+.drip:nth-child(6) { left: 237px; height: 27px; }
+
+/* CAKE DECORATIONS */
+
+.berries {
+    position: absolute;
+    width: 100%;
+    top: 29px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 24px;
+    z-index: 4;
+}
+
+.berry {
+    width: 12px;
+    height: 12px;
+    border-radius: 50% 50% 45% 45%;
+    background: radial-gradient(circle at 30% 25%, #ffb5d0, #bc365e 65%, #691d3c);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.berry:nth-child(even) {
+    transform: translateY(7px);
+}
+
+/* CHOCOLATE SHAVINGS */
+
+.shavings {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    z-index: 5;
+}
+
+.shavings span {
+    width: 16px;
+    height: 4px;
+    border-radius: 4px;
+    background: #f2c6b8;
+    transform: rotate(25deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* CAKE PLATE */
+
+.plate {
+    position: absolute;
+    width: 335px;
+    height: 29px;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: linear-gradient(
+        180deg,
+        #d8c3db,
+        #85748f 45%,
+        #473b59 80%,
+        #a999b5
+    );
+    box-shadow:
+        0 8px 16px rgba(0,0,0,0.45),
+        0 0 18px rgba(255,190,140,0.08);
+    z-index: -1;
+}
+
+/* ===== NUMBER CANDLES: 19 ===== */
+
+.candles {
+    position: absolute;
+    width: 110px;
+    height: 142px;
+    bottom: 145px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    z-index: 8;
+}
+
+.number-candle {
+    position: relative;
+    height: 94px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px 7px 4px 4px;
+    background: linear-gradient(
+        90deg,
+        #e5a6cb,
+        #fff0e8 35%,
+        #f9c2dc 70%,
+        #bd7ba8
+    );
+    box-shadow:
+        inset 2px 0 3px rgba(255,255,255,0.5),
+        inset -3px 0 4px rgba(90,35,75,0.2),
+        0 0 12px rgba(255, 175, 220, 0.12);
+    color: #9c426f;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+.number-candle.one {
+    width: 29px;
+}
+
+.number-candle.nine {
+    width: 37px;
+}
+
+.wick {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 12px;
+    border-radius: 2px;
+    background: #33202b;
+}
+
+/* ===== FLAMES ===== */
+
+.flame {
+    position: absolute;
+    top: -41px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 34px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(
+        180deg,
+        #fffde1 0%,
+        #fff3a1 22%,
+        #ffb34d 55%,
+        #ff663f 85%,
+        rgba(255,80,50,0.1) 100%
+    );
+    transform-origin: center bottom;
+    box-shadow:
+        0 0 10px #ffbd6b,
+        0 0 24px rgba(255, 166, 71, 0.9),
+        0 0 50px rgba(255, 116, 74, 0.55);
+    animation: flameFlicker 0.13s infinite alternate;
+    transition: opacity 0.3s ease;
+}
+
+.flame::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 18px;
+    left: 6px;
+    bottom: 3px;
+    border-radius: 50%;
+    background: #fffdf0;
+    filter: blur(1px);
+}
+
+@keyframes flameFlicker {
+    from {
+        transform: translateX(-50%) rotate(-3deg) scale(1);
+    }
+    to {
+        transform: translateX(-50%) rotate(4deg) scale(1.08, 0.94);
+    }
+}
+
+/* ===== BUTTON ===== */
+
+.action-area {
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 22px;
+    transition: opacity 0.8s ease;
+}
+
+.instruction {
+    font-size: 11px;
+    color: #c8bedf;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.blow-button {
+    position: relative;
+    border: 1px solid rgba(255, 224, 246, 0.7);
+    padding: 15px 26px;
+    border-radius: 50px;
+    background: linear-gradient(
+        135deg,
+        #fff0f8,
+        #edc5e6
+    );
+    color: #492542;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    box-shadow:
+        0 0 20px rgba(255, 199, 238, 0.12),
+        inset 0 1px 2px rgba(255,255,255,0.8);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.blow-button:active {
+    transform: scale(0.95);
+}
+
+.blow-button:disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+/* ===== WISH MESSAGE ===== */
+
+.wish-message {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    padding: 0 16px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-35%);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease, visibility 2s ease, transform 2s ease;
+    pointer-events: none;
+}
+
+.wish-message h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(31px, 7.2vw, 45px);
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.3px;
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.9),
+        0 0 24px rgba(255,255,255,0.45),
+        0 0 55px rgba(207,190,255,0.22);
+}
+
+.wish-message p {
+    margin-top: 15px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #dcd6f1;
+    letter-spacing: 2px;
+}
+
+.wish-message.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%);
+}
+
+/* ===== AFTER THE CANDLE BLOWS OUT ===== */
+
+body.blown .sky {
+    background:
+        radial-gradient(
+            ellipse at 50% 60%,
+            rgba(30, 24, 54, 0.14),
+            transparent 48%
+        ),
+        linear-gradient(
+            180deg,
+            #02030a 0%,
+            #050714 55%,
+            #090817 100%
+        );
+}
+
+body.blown .light-glow {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35);
+}
+
+body.blown .warm-light {
+    opacity: 0;
+}
+
+body.blown .flame {
+    animation: blowOut 0.65s ease-out forwards;
+}
+
+@keyframes blowOut {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        filter: blur(0);
+    }
+
+    35% {
+        opacity: 0.9;
+        transform: translateX(10px) rotate(65deg) scale(0.8, 0.55);
+        filter: blur(1px);
+    }
+
+    65% {
+        opacity: 0.45;
+        transform: translateX(19px) rotate(80deg) scale(0.45, 0.3);
+        filter: blur(3px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(24px) rotate(90deg) scale(0.1);
+        filter: blur(5px);
+    }
+}
+
+body.blown .intro {
+    opacity: 0;
+}
+
+body.blown .action-area {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+body.blown .stars {
+    opacity: 0.5;
+}
+
+body.blown .moon {
+    opacity: 0.55;
+}
+
+body.blown .cake-stage {
+    filter: brightness(0.43);
+    transition: filter 2.5s ease;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 400px) {
+    .moon {
+        width: 48px;
+        height: 48px;
+        top: 7%;
+        right: 9%;
+    }
+
+    .moon::after {
+        width: 44px;
+        height: 44px;
+        top: -6px;
+        left: 13px;
+    }
+
+    .cake-stage {
+        transform: scale(0.88);
+        margin-top: -8px;
+        margin-bottom: -12px;
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+
+    .intro {
+        margin-bottom: 0;
+    }
+
+    .action-area {
+        margin-top: 8px;
+    }
+
+    .wish-message h2 {
+        font-size: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .star,
+    .flame,
+    .cake {
+        animation: none;
+    }
+}
+#continueBtn {
+  display: none;
+  margin: 35px auto 25px;
+  padding: 14px 35px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 30px;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 16px;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255,255,255,0.15);
+  animation: continueAppear 1s ease forwards;
+}
+
+#continueBtn:active {
+  transform: scale(0.95);
+}
+
+@keyframes continueAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+</div>
+
+<main class="scene">
+
+    <header class="intro">
+        <p class="eyebrow">A little midnight magic</p>
+        <h1 class="heading">Close your eyes, birthday girl.</h1>
+        <p class="subheading">It's time to make a wish. ✨</p>
+    </header>
+
+    <!-- CAKE -->
+
+    <div class="cake-stage" id="cakeStage">
+
+        <div class="light-glow"></div>
+        <div class="warm-light"></div>
+
+        <div class="cake">
+
+            <div class="cake-body"></div>
+
+            <div class="cake-top">
+
+                <div class="berries">
+                    <span class="berry"></span>
+                    <span class="berry"></span>
+                    <span class="berry"></span>
+                    <span class="berry"></span>
+                    <span class="berry"></span>
+                </div>
+
+                <div class="shavings">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+            <div class="drips">
+                <span class="drip"></span>
+                <span class="drip"></span>
+                <span class="drip"></span>
+                <span class="drip"></span>
+                <span class="drip"></span>
+                <span class="drip"></span>
+            </div>
+
+        </div>
+
+        <!-- AGE 19 CANDLES -->
+
+        <div class="candles">
+
+            <div class="number-candle one">
+                1
+                <div class="wick"></div>
+                <div class="flame"></div>
+            </div>
+
+            <div class="number-candle nine">
+                9
+                <div class="wick"></div>
+                <div class="flame"></div>
+            </div>
+
+        </div>
+
+        <div class="plate"></div>
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <div class="action-area" id="actionArea">
+
+        <p class="instruction">
+            Take a deep breath and manifest your wish ♡
+        </p>
+
+        <button class="blow-button" id="blowButton">
+            Manifest and blow the candle 🕯️
+        </button>
+
+    </div>
+
+    <!-- FINAL MESSAGE -->
+
+    <div class="wish-message" id="wishMessage" aria-live="polite">
+
+        <h2>Your wish is accepted 😇❤️</h2>
+
+        <p>May the universe bring it to you.</p>
+
+    </div>
+      <button id="continueBtn" onclick="window.location.href='page3.html'" style="display:none;">
+    Continue →
+</button>
+</main>
+
+<script>
+
+/* ===== CREATE STARS ===== */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 100; i++) {
+
+    const star = document.createElement("span");
+
+    star.className = "star";
+
+    const size = Math.random() * 2.5 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.animationDelay = Math.random() * 4 + "s";
+    star.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    stars.appendChild(star);
+}
+
+/* ===== BLOW OUT THE CANDLES ===== */
+
+const button = document.getElementById("blowButton");
+const wishMessage = document.getElementById("wishMessage");
+
+let hasBlown = false;
+
+button.addEventListener("click", function () {
+
+    if (hasBlown) return;
+
+    hasBlown = true;
+
+    button.disabled = true;
+
+    /* Blow out the flames and fade the light */
+
+    document.body.classList.add("blown");
+
+    /* Reveal the wish after the scene gets darker */
+
+    setTimeout(function () {
+
+    wishMessage.classList.add("show");
+
+    document.getElementById("continueBtn").style.display = "block";
+
+}, 1100);
+
+});
+
+</script>
+
+</body>
+</html>
