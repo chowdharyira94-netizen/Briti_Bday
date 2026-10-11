@@ -93,7 +93,7 @@ body::before {
 }
 
 .photo-frame {
-    width: min(290px, 85%);
+    width: min(340px, 88%);
     padding: 12px 12px 20px;
 
     background: linear-gradient(
@@ -126,19 +126,11 @@ body::before {
 }
 
 .photo {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
     display: block;
-
-    background: linear-gradient(
-        135deg,
-        #d7d7df,
-        #f8f7fa,
-        #c4c5d0
-    );
-
-    filter: saturate(0.88) contrast(0.96);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
 }
 
 /* Caption under each photograph */
@@ -354,6 +346,11 @@ body::before {
     <div class="divider">✧</div>
 
     <div class="note">
+
+        <p>
+            At last, Happy Birthday once againnnnn
+            <span class="heart">❤️</span>
+        </p>
 
         <p>
             Yestai khushi bus and keep smiling okie baby
