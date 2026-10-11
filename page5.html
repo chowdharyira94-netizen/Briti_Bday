@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Memory ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #f5b7cb;
+    --light-pink: #fff0f5;
+    --dark-pink: #c75c83;
+    --text: #78485c;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse at top left, #fffafd 0%, transparent 45%),
+        radial-gradient(ellipse at bottom right, #f8c8d9 0%, transparent 48%),
+        linear-gradient(145deg, #fff2f7, #fce0ea, #fff5f8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 16px;
+    position: relative;
+}
+
+/* Soft floating decorations */
+
+.decor {
+    position: fixed;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+.d1 {
+    top: 7%;
+    left: 8%;
+    font-size: 29px;
+}
+
+.d2 {
+    top: 14%;
+    right: 9%;
+    font-size: 24px;
+    animation-delay: 1s;
+}
+
+.d3 {
+    bottom: 12%;
+    left: 7%;
+    font-size: 24px;
+    animation-delay: 1.5s;
+}
+
+.d4 {
+    bottom: 8%;
+    right: 8%;
+    font-size: 30px;
+    animation-delay: 0.7s;
+}
+
+.d5 {
+    top: 48%;
+    left: 3%;
+    font-size: 16px;
+    animation-delay: 2s;
+}
+
+.d6 {
+    top: 54%;
+    right: 4%;
+    font-size: 18px;
+    animation-delay: 1.2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(7deg);
+    }
+}
+
+/* Main scrapbook */
+
+.scrapbook {
+    width: 100%;
+    max-width: 410px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px 20px 26px;
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 25px;
+    background: rgba(255, 250, 252, 0.76);
+    box-shadow:
+        0 15px 45px rgba(184, 93, 126, 0.13),
+        inset 0 0 25px rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Header */
+
+.tiny-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #bd7994;
+    margin-bottom: 9px;
+}
+
+h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: normal;
+    font-size: clamp(31px, 8vw, 39px);
+    line-height: 1.2;
+    color: #bd6687;
+}
+
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    color: #a87b8d;
+}
+
+/* Decorative bow */
+
+.bow {
+    font-size: 31px;
+    margin: 13px 0 7px;
+    filter: drop-shadow(0 3px 4px rgba(190, 89, 128, 0.15));
+    animation: bowFloat 3s ease-in-out infinite;
+}
+
+@keyframes bowFloat {
+    0%, 100% { transform: rotate(-4deg) scale(1); }
+    50% { transform: rotate(4deg) scale(1.06); }
+}
+
+/* Childhood photo frame */
+
+.photo-wrap {
+    width: 100%;
+    max-width: 290px;
+    margin: 0 auto;
+    position: relative;
+    padding: 11px 11px 15px;
+    background: #fffdfd;
+    border-radius: 5px;
+    box-shadow:
+        0 7px 18px rgba(148, 79, 105, 0.13),
+        0 0 0 1px rgba(225, 165, 188, 0.35);
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.photo-wrap:hover {
+    transform: rotate(0deg) scale(1.015);
+    box-shadow: 0 12px 28px rgba(148, 79, 105, 0.2);
+}
+
+.photo-wrap::before {
+    content: "♡";
+    position: absolute;
+    top: -15px;
+    right: -11px;
+    z-index: 3;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c7658a;
+    background: #fff0f5;
+    border: 1px solid #f4c2d4;
+    border-radius: 50%;
+    font-size: 21px;
+    transform: rotate(12deg);
+}
+
+.photo-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 355px;
+    object-fit: contain;
+    background: #fff7fa;
+    border-radius: 2px;
+}
+
+/* Tape effect */
+
+.tape {
+    position: absolute;
+    z-index: 4;
+    width: 78px;
+    height: 23px;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    background: rgba(246, 190, 210, 0.72);
+    border-left: 1px dashed rgba(255,255,255,0.7);
+    border-right: 1px dashed rgba(255,255,255,0.7);
+}
+
+/* Caption */
+
+.photo-caption {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 19px;
+    color: #bd6687;
+}
+
+.caption-small {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-top: 5px;
+    color: #b38b9a;
+}
+
+/* Memory note */
+
+.memory-note {
+    margin: 24px auto 0;
+    max-width: 300px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #936779;
+}
+
+.memory-note strong {
+    color: #c15e83;
+    font-weight: 600;
+}
+
+/* Music control */
+
+.music-area {
+    margin-top: 19px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.music-button {
+    border: 1px solid #edc1d2;
+    background: rgba(255,255,255,0.75);
+    color: #b45d7e;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(193, 94, 131, 0.08);
+    transition: 0.25s ease;
+}
+
+.music-button:active {
+    transform: scale(0.96);
+}
+
+.music-button:hover {
+    background: #fff0f5;
+}
+
+.music-hint {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #b8879a;
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+/* Continue button */
+
+.continue-button {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #e9a4bd, #d77fa0);
+    color: white;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 17px rgba(196, 91, 130, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.continue-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 22px rgba(196, 91, 130, 0.3);
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #c69aaa;
+}
+
+@media (max-width: 360px) {
+    .scrapbook {
+        padding: 24px 15px;
+    }
+
+    .memory-note {
+        font-size: 11px;
+    }
+
+    .photo-wrap img {
+        max-height: 300px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating decorations -->
+
+<div class="decor d1">🎀</div>
+<div class="decor d2">♡</div>
+<div class="decor d3">✧</div>
+<div class="decor d4">🎀</div>
+<div class="decor d5">⋆</div>
+<div class="decor d6">♡</div>
+
+<main class="scrapbook">
+
+    <div class="tiny-label">a little piece of forever</div>
+
+    <h1>Little Miss Birthday ♡</h1>
+
+    <p class="subtitle">a tiny memory, a million feelings</p>
+
+    <div class="bow">୨୧</div>
+
+    <!-- Childhood photo -->
+
+    <div class="photo-wrap">
+        <div class="tape"></div>
+
+        <img
+            src="bae.jpg"
+            alt="A precious childhood picture of the birthday girl"
+        >
+    </div>
+
+    <div class="photo-caption">
+        little her, big dreams ♡
+    </div>
+
+    <div class="caption-small">
+        THEN, NOW & ALWAYS
+    </div>
+
+    <div class="memory-note">
+        If only little you knew how many beautiful things
+        were waiting for her. 🥹<br>
+
+        <strong>
+            Keep that smile forever, birthday girl. ♡
+        </strong>
+    </div>
+
+    <!-- Music button -->
+
+    <div class="music-area">
+
+        <button
+            type="button"
+            class="music-button"
+            id="musicButton"
+        >
+            ♫ Play our little song
+        </button>
+
+        <div class="music-hint" id="musicHint">
+            ♫ tap to hear ♡
+        </div>
+
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="birthday_song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- This works independently of the music -->
+
+    <a class="continue-button" href="page6.html">
+        Continue → ♡
+    </a>
+
+    <div class="footer">
+        MADE WITH LOVE, JUST FOR YOU ✧
+    </div>
+
+</main>
+
+<script>
+const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
+const musicHint = document.getElementById("musicHint");
+
+let isPlaying = false;
+
+function updateMusicButton() {
+    if (isPlaying) {
+        musicButton.textContent = "♫ Pause our little song";
+        musicHint.textContent = "♪ playing just for you ♡";
+    } else {
+        musicButton.textContent = "♫ Play our little song";
+        musicHint.textContent = "♫ tap to hear ♡";
+    }
+}
+
+async function playMusic() {
+    try {
+        await music.play();
+        isPlaying = true;
+        updateMusicButton();
+    } catch (error) {
+        isPlaying = false;
+        updateMusicButton();
+        musicHint.textContent = "♫ tap to hear ♡";
+    }
+}
+
+musicButton.addEventListener("click", async function () {
+    if (music.paused) {
+        await playMusic();
+    } else {
+        music.pause();
+        isPlaying = false;
+        updateMusicButton();
+    }
+});
+
+/* Try autoplay; phones may require a tap first. */
+
+window.addEventListener("load", function () {
+    playMusic();
+});
+
+music.addEventListener("ended", function () {
+    isPlaying = false;
+    updateMusicButton();
+});
+</script>
+
+</body>
+</html>
