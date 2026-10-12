@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Born to Be a Diva 💋</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --pink: #ffb5c8;
+    --gold: #ffe5a0;
+}
+
+html {
+    min-height: 100%;
+    background: #200008;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    padding: 25px 16px 35px;
+    text-align: center;
+    color: #fff3f6;
+    font-family: 'Poppins', sans-serif;
+    background:
+        radial-gradient(ellipse at 50% 25%, #84102b 0%, transparent 48%),
+        radial-gradient(ellipse at 0% 85%, #650019 0%, transparent 45%),
+        linear-gradient(150deg, #170006, #490014 48%, #180006);
+}
+
+.sparkle {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    color: #ffe8ee;
+    text-shadow: 0 0 12px #ff8da9;
+    animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .25; transform: scale(.75); }
+    to { opacity: 1; transform: scale(1.15); }
+}
+
+.top-label,
+h1,
+.subtitle,
+.photo-area,
+.crown-stage,
+.music-button,
+.music-status,
+.bottom-kiss {
+    position: relative;
+    z-index: 1;
+}
+
+.top-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #ffc2d1;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: clamp(37px, 10vw, 54px);
+    line-height: 1.05;
+}
+
+h1 em {
+    color: #ffb1c6;
+}
+
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #f7c8d2;
+    margin: 12px 0 22px;
+}
+
+/* PHOTO */
+
+.photo-area {
+    width: min(330px, 88vw);
+    margin: 0 auto;
+}
+
+.photo-frame {
+    position: relative;
+    width: 100%;
+    height: min(420px, 112vw);
+    padding: 7px;
+    border-radius: 19px;
+    background: linear-gradient(
+        135deg,
+        #ffe4ea,
+        #b36b7d 35%,
+        #f9d8df 55%,
+        #7e273b
+    );
+    box-shadow:
+        0 15px 45px #0008,
+        0 0 28px #ff466a24;
+}
+
+.photo-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 13px;
+    background: #39000d;
+}
+
+.photo-inner img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.target-glow {
+    position: absolute;
+    z-index: 4;
+    top: 3%;
+    left: 50%;
+    width: 110px;
+    height: 75px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse,
+        #ffe9b5c9,
+        #ffcb5b45 42%,
+        transparent 73%
+    );
+    filter: blur(4px);
+    transition: opacity .5s;
+}
+
+.target-glow::after {
+    content: "";
+    position: absolute;
+    inset: 12px 17px;
+    border-top: 2px solid #ffe7a2;
+    border-radius: 50%;
+    box-shadow: 0 -3px 17px #ffd76b;
+}
+
+.target-glow.visible {
+    opacity: 1;
+}
+
+.photo-caption {
+    color: #ffc4d1;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 12px;
+}
+
+/* CROWN */
+
+.crown-stage {
+    min-height: 140px;
+    margin: 18px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instruction {
+    min-height: 25px;
+    margin-bottom: 5px;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.crown {
+    width: 112px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 68px;
+    line-height: 1;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    animation: floatCrown 2s ease-in-out infinite;
+    filter: drop-shadow(0 7px 8px #0007);
+}
+
+.crown.dragging {
+    animation: none;
+    filter: drop-shadow(0 0 18px #ffe6a1);
+}
+
+@keyframes floatCrown {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-7px) rotate(3deg); }
+}
+
+.hint {
+    color: #eebbc7;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+/* MUSIC BUTTON */
+
+.music-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px auto 0;
+    padding: 11px 17px;
+    border-radius: 30px;
+    border: 1px solid #ffc0d077;
+    background: #ffffff0c;
+    color: #ffe2e9;
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.music-button:active {
+    transform: scale(.97);
+}
+
+.music-status {
+    font-size: 9px;
+    color: #d9a9b5;
+    margin-top: 7px;
+}
+
+.bottom-kiss {
+    margin-top: 18px;
+    color: #ffafc4;
+    font-family: 'DM Serif Display', serif;
+    font-size: 23px;
+    font-style: italic;
+}
+
+/* PLACED CROWN */
+
+.crown-placed {
+    position: absolute !important;
+    z-index: 6 !important;
+    left: 50%;
+    top: 6%;
+    width: 88px;
+    height: 60px;
+    margin: 0;
+    font-size: 58px;
+    cursor: default;
+    pointer-events: none;
+    animation: settle .7s ease-out forwards !important;
+    filter:
+        drop-shadow(0 0 12px #ffe49b)
+        drop-shadow(0 4px 5px #0008);
+}
+
+@keyframes settle {
+    0% { transform: translate(-50%, -50%) scale(1.4) rotate(-12deg); }
+    70% { transform: translate(-50%, -50%) scale(.9) rotate(4deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0); }
+}
+
+/* FINAL MESSAGE */
+
+.reveal {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow-y: auto;
+    background: #130006b8;
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .8s ease, visibility .8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.glass-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(420px, 100%);
+    padding: 38px 22px 32px;
+    border-radius: 25px;
+    border: 1px solid #ffffff45;
+    background: linear-gradient(
+        145deg,
+        #ffffff24,
+        #ffffff08 45%,
+        #9c14353b
+    );
+    box-shadow:
+        0 25px 70px #0008,
+        inset 0 1px 0 #ffffff45,
+        0 0 35px #ff547b20;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: translateY(20px) scale(.94);
+    transition: transform .8s ease;
+}
+
+.reveal.show .glass-card {
+    transform: translateY(0) scale(1);
+}
+
+.reveal-kiss {
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+.reveal-title {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 7.5vw, 39px);
+    line-height: 1.3;
+    color: #fff2f5;
+}
+
+.reveal-title span {
+    color: #ffb0c5;
+    font-style: italic;
+}
+
+.reveal-divider {
+    width: 70px;
+    height: 1px;
+    margin: 22px auto 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ffd1dd,
+        transparent
+    );
+}
+
+.reveal-second {
+    margin-top: 16px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffe0e8;
+    letter-spacing: 1px;
+}
+
+/* Music controls are BELOW the glass card, never inside it. */
+.reveal .music-button {
+    position: relative;
+    flex: 0 0 auto;
+    z-index: 101;
+    margin: 35px auto 0;
+}
+
+.reveal .music-status {
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: 8px;
+    font-size: 9px;
+    color: #e8bac6;
+}
+
+@media (max-width: 380px) {
+    body {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .glass-card {
+        padding: 32px 17px 28px;
+    }
+
+    .reveal .music-button {
+        margin-top: 28px;
+    }
+}
+
+@media (max-height: 650px) {
+    .reveal {
+        justify-content: flex-start;
+    }
+
+    .glass-card {
+        margin-top: auto;
+    }
+
+    .reveal .music-status {
+        margin-bottom: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sparkle" style="top:12%;left:8%;font-size:16px;">✦</div>
+<div class="sparkle" style="top:25%;right:8%;font-size:12px;animation-delay:.8s;">✧</div>
+<div class="sparkle" style="top:52%;left:5%;font-size:13px;animation-delay:1.2s;">✦</div>
+<div class="sparkle" style="top:67%;right:7%;font-size:17px;animation-delay:.4s;">✧</div>
+<div class="sparkle" style="bottom:9%;left:15%;font-size:12px;animation-delay:1.6s;">✦</div>
+
+<div class="top-label">THE FINAL LOOK • JUST FOR YOU</div>
+
+<h1>Born to be<br><em>a diva.</em> 💋</h1>
+
+<p class="subtitle">A little finishing touch, birthday girl ❤️‍🔥</p>
+
+<div class="photo-area">
+    <div class="photo-frame">
+        <div class="photo-inner" id="photoInner">
+            <img src="diva.jpg" alt="Birthday diva" id="divaPhoto">
+            <div class="target-glow" id="targetGlow"></div>
+        </div>
+    </div>
+    <div class="photo-caption">the face card never declines ✦</div>
+</div>
+
+<div class="crown-stage" id="crownStage">
+    <div class="instruction" id="instruction">
+        OH? A DIVA WITHOUT HER CROWN? 💋
+    </div>
+
+    <div class="crown" id="crown" aria-label="Drag the crown">
+        👑
+    </div>
+
+    <div class="hint" id="hint">Use your finger to lift the crown ↑</div>
+</div>
+
+<div class="bottom-kiss">Diva 💋</div>
+
+<audio id="bgMusic" src="birthday_song2.mp3" loop preload="auto"></audio>
+
+<!-- Final overlay starts HIDDEN. -->
+<div class="reveal" id="reveal" aria-hidden="true">
+    <div class="glass-card">
+        <div class="reveal-kiss">💋 ❤️‍🔥 💋</div>
+
+        <div class="reveal-title">
+            Once again lastly<br>
+            Happy Birthday<br>
+            <span>Britsss ❤️</span>
+        </div>
+
+        <div class="reveal-divider"></div>
+
+        <div class="reveal-second">Happy 9teen 💋</div>
+    </div>
+
+    <button class="music-button" id="musicButton" type="button">
+        <span id="musicIcon">♫</span>
+        <span id="musicText">TAP TO PLAY THE VIBE</span>
+    </button>
+
+    <div class="music-status" id="musicStatus">
+        a little music for my diva ♡
+    </div>
+</div>
+
+<script>
+const crown = document.getElementById("crown");
+const photoInner = document.getElementById("photoInner");
+const targetGlow = document.getElementById("targetGlow");
+const instruction = document.getElementById("instruction");
+const hint = document.getElementById("hint");
+const crownStage = document.getElementById("crownStage");
+const reveal = document.getElementById("reveal");
+
+const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
+const musicIcon = document.getElementById("musicIcon");
+const musicText = document.getElementById("musicText");
+const musicStatus = document.getElementById("musicStatus");
+
+let lifted = false;
+let placed = false;
+let dragging = false;
+let offsetX = 0;
+let offsetY = 0;
+let revealStarted = false;
+
+/* Music never starts when the page first loads. */
+function updateMusicButton() {
+    if (music.paused) {
+        musicIcon.textContent = "♫";
+        musicText.textContent = "TAP TO PLAY THE VIBE";
+    } else {
+        musicIcon.textContent = "Ⅱ";
+        musicText.textContent = "TAP TO PAUSE THE VIBE";
+    }
+}
+
+async function playMusic() {
+    try {
+        await music.play();
+        musicStatus.textContent = "a little music for my diva ♡";
+    } catch (error) {
+        /* Keep the page pretty if the browser blocks playback. */
+        musicStatus.textContent = "tap ♫ for the vibes ♡";
+    }
+
+    updateMusicButton();
+}
+
+musicButton.addEventListener("click", async () => {
+    if (music.paused) {
+        await playMusic();
+    } else {
+        music.pause();
+        updateMusicButton();
+    }
+});
+
+music.addEventListener("play", updateMusicButton);
+music.addEventListener("pause", updateMusicButton);
+
+/* Lift and drag the crown. */
+crown.addEventListener("pointerdown", (event) => {
+    if (placed || dragging) return;
+
+    event.preventDefault();
+
+    const rect = crown.getBoundingClientRect();
+    offsetX = event.clientX - rect.left;
+    offsetY = event.clientY - rect.top;
+
+    if (!lifted) {
+        lifted = true;
+        targetGlow.classList.add("visible");
+        instruction.textContent = "NOW PUT IT ON YOUR HEAD 💅";
+        hint.textContent = "Drag the crown onto the glowing spot ✨";
+    }
+
+    dragging = true;
+    crown.classList.add("dragging");
+
+    crown.style.position = "fixed";
+    crown.style.left = rect.left + "px";
+    crown.style.top = rect.top + "px";
+    crown.style.width = rect.width + "px";
+    crown.style.height = rect.height + "px";
+    crown.style.margin = "0";
+    crown.style.zIndex = "200";
+
+    document.body.appendChild(crown);
+
+    try {
+        crown.setPointerCapture(event.pointerId);
+    } catch (error) {}
+});
+
+crown.addEventListener("pointermove", (event) => {
+    if (!dragging || placed) return;
+
+    event.preventDefault();
+
+    crown.style.left = (event.clientX - offsetX) + "px";
+    crown.style.top = (event.clientY - offsetY) + "px";
+});
+
+crown.addEventListener("pointerup", () => {
+    if (!dragging || placed) return;
+
+    dragging = false;
+    crown.classList.remove("dragging");
+
+    const crownRect = crown.getBoundingClientRect();
+    const photoRect = photoInner.getBoundingClientRect();
+
+    const crownX = crownRect.left + crownRect.width / 2;
+    const crownY = crownRect.top + crownRect.height / 2;
+
+    const targetX = photoRect.left + photoRect.width / 2;
+    const targetY = photoRect.top + photoRect.height * 0.07;
+
+    const isOverPhoto =
+        crownX >= photoRect.left &&
+        crownX <= photoRect.right &&
+        crownY >= photoRect.top &&
+        crownY <= photoRect.bottom;
+
+    const closeToTarget =
+        Math.hypot(crownX - targetX, crownY - targetY) < 100;
+
+    if (isOverPhoto || closeToTarget) {
+        placeCrown(targetX, targetY);
+    } else {
+        returnCrown();
+    }
+});
+
+crown.addEventListener("pointercancel", () => {
+    if (dragging && !placed) {
+        dragging = false;
+        crown.classList.remove("dragging");
+        returnCrown();
+    }
+});
+
+function returnCrown() {
+    crown.style.position = "";
+    crown.style.left = "";
+    crown.style.top = "";
+    crown.style.width = "";
+    crown.style.height = "";
+    crown.style.zIndex = "";
+    crown.style.margin = "";
+
+    crownStage.appendChild(crown);
+    hint.textContent = "Try again — place it on the photo ✨";
+}
+
+function placeCrown(targetX, targetY) {
+    if (placed) return;
+
+    placed = true;
+
+    crown.className = "crown crown-placed";
+    photoInner.appendChild(crown);
+
+    const photoRect = photoInner.getBoundingClientRect();
+
+    crown.style.left = (targetX - photoRect.left) + "px";
+    crown.style.top = (targetY - photoRect.top) + "px";
+
+    instruction.textContent = "THAT'S THE LOOK. ❤️‍🔥";
+    hint.textContent = "Unbothered. Iconic. A whole diva. 💋";
+    targetGlow.classList.remove("visible");
+
+    /* Reveal once only, after the crown has been placed. */
+    if (!revealStarted) {
+        revealStarted = true;
+
+        setTimeout(() => {
+            reveal.classList.add("show");
+            reveal.setAttribute("aria-hidden", "false");
+
+            /* The background song begins with the final message. */
+            playMusic();
+        }, 1800);
+    }
+}
+</script>
+
+</body>
+</html>
